@@ -117,14 +117,20 @@ button:hover {
 /* =================================
   Page Styles
 ==================================== */
+/* added for error usage
+red and green
+*/
 input.valid, textarea.valid {
   border: 2px solid green;
 }
 
-input.invalid, textarea.invalid{
+input.invalid, textarea.invalid {
   border: 2px solid red;
 }
-
+p.invalid {
+  color: red;
+  font-size: 8px;
+}
 .container {
 	margin: auto;
 	max-width: 680px;
