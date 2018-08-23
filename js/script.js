@@ -8,6 +8,10 @@ $(document).ready(function () {
   $('#payment option[value="select_method"]').prop("disabled",true)
   $('input[name="all"]').addClass('invalid')
   $('#colors-js-puns').hide()
+  $('#mail').addClass('invalid')
+  $('#cc-num').addClass('invalid')
+  $('#zip').addClass('invalid')
+  $('#cvv').addClass('invalid')
 });
 //This function shows the input text box for other roles
 //when "other" is chosen from drop down box and hides when it's unselected.
@@ -56,16 +60,16 @@ let changeSum = function(sum){
   document.getElementById('divSum').innerHTML = "Total: $" + totalSum;
   }
 
-$('.activities input[name="all"]').change( function(){
-if($(this).is(':checked')){
+$('.activities input[name="all"]').change( function() {
+if($(this).is(':checked')) {
   changeSum(200)
   } else {
   changeSum(-200)
     }
 });
 
-$('.activities input[name="js-frameworks"]').change( function(){
-  if ($(this).is(':checked')){
+$('.activities input[name="js-frameworks"]').change( function() {
+  if ($(this).is(':checked')) {
     $('.activities input[name="express"]').prop('disabled', true);
     $('.activities label:eq(3)').css("color", "grey").css("text-decoration", "line-through")
     changeSum(100)
@@ -76,8 +80,8 @@ $('.activities input[name="js-frameworks"]').change( function(){
         }
 });
 
-$('.activities input[name="js-libs"]').change( function(){
-  if ($(this).is(':checked')){
+$('.activities input[name="js-libs"]').change( function() {
+  if ($(this).is(':checked')) {
     $('.activities input[name="node"]').prop('disabled', true)
     $('.activities label:eq(4)').css("color", "grey").css("text-decoration", "line-through")
     changeSum(100)
@@ -88,8 +92,8 @@ $('.activities input[name="js-libs"]').change( function(){
         }
 });
 
-$('.activities input[name="express"]').change( function(){
-  if ($(this).is(':checked')){
+$('.activities input[name="express"]').change( function() {
+  if ($(this).is(':checked')) {
     $('.activities input[name="js-frameworks"]').prop('disabled', true)
     $('.activities label:eq(1)').css("color", "grey").css("text-decoration", "line-through")
     changeSum(100)
@@ -100,8 +104,8 @@ $('.activities input[name="express"]').change( function(){
         }
 });
 
-$('.activities input[name="node"]').change( function(){
-  if ($(this).is(':checked')){
+$('.activities input[name="node"]').change( function () {
+  if ($(this).is(':checked')) {
     $('.activities input[name="js-libs"]').prop('disabled', true)
     $('.activities label:eq(2)').css("color", "grey").css("text-decoration", "line-through")
     changeSum(100)
@@ -111,17 +115,17 @@ $('.activities input[name="node"]').change( function(){
       changeSum(-100)
         }
 });
-$('.activities input[name="build-tools"]').change( function(){
-  if ($(this).is(':checked')){
+$('.activities input[name="build-tools"]').change( function () {
+  if ($(this).is(':checked')) {
     changeSum(100)
-    }else {
+    } else {
     changeSum(-100)
       }
   });
-$('.activities input[name="npm"]').change( function(){
-  if ($(this).is(':checked')){
+$('.activities input[name="npm"]').change( function() {
+  if ($(this).is(':checked')) {
     changeSum(100)
-    }else {
+    } else {
     changeSum(-100)
       }
  });
@@ -281,10 +285,17 @@ at least one checkbox.  But if all is valid, then alert pops up thanking user.
 */
 function validate () {
   $('button[type="submit"]').click(function(e) {
-    if (($('input').hasClass("invalid")) && ($('.activities input:checked').length < 1)) {
-      event.preventDefault();
-      $("fieldset:eq(0)").prepend('<p class="invalid">Please Correct the highlighted areas and make sure to check at least one activity.</p>');
+    if (($('input:text').hasClass("invalid"))) {
+      e.preventDefault();
+      $("fieldset:eq(0)").prepend('<p class="invalid">Please Correct the highlighted areas and make sure to check at least one activity.</p>')
       $('html,body').animate({scrollTop: 0});
+    }if (($('input').hasClass("valid"))) {
+      $("fieldset:eq(0) legend p").hide()
+    }if (($('input:checkbox:checked').length < 1)) {
+      $("fieldset:eq(2) legend").append('<p class="invalid">Please pick an activity.</p>')
+      e.preventDefault();
+    }if (($('input:checkbox:checked').length >= 1)){
+      $("fieldset:eq(2) legend p").hide()
     }if($('#name').val() === "") {
       $('#name').addClass("invalid")
     } if ($('#mail').val() === "") {
@@ -295,9 +306,7 @@ function validate () {
       $('#zip').addClass("invalid")
     } if ($('#payment').val() === "credit card"  && $('#cvv').val() === "") {
       $('#cvv').addClass("invalid")
-    } else {
-      alert('Thank you for registering, have a wonderful day!')
-}
+    }
 })
 }
 validate()
