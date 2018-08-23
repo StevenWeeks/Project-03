@@ -6,7 +6,6 @@ $(document).ready(function () {
   $('#payment').val("credit card");
   $('fieldset div p').hide();
   $('#payment option[value="select_method"]').prop("disabled",true)
-
   $('#colors-js-puns').hide()
   $('#mail').addClass('invalid')
   $('#cc-num').addClass('invalid')
@@ -189,14 +188,16 @@ name()
  during the variable email. doesn't turn green until @ and .com/.net/etc
  is used. */
 
-function mail () {
+ function mail () {
+
 $('#mail').on("input", function() {
   let inputs = $(this);
   let email = /^([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   let true_email = email.test(inputs.val());
     if (true_email) {
       inputs.removeClass("invalid").addClass("valid");
-  }  else { inputs.removeClass("valid").addClass("invalid");
+  }  else {
+      inputs.removeClass("valid").addClass("invalid");
       }
   })
   $('#mail').on("focus", function() {
@@ -295,7 +296,7 @@ function validate () {
       $("fieldset:eq(2) legend").append('<p class="invalid">Please pick an activity.</p>')
       e.preventDefault();
       $("fieldset:eq(2) legend").animate({scrollTop: 0});
-    }if (($('input:checkbox:checked').length >= 1)){
+    }if (($('input:checkbox:checked').length >= 1)) {
       $("fieldset:eq(2) legend p").hide()
     }if($('#name').val() === "") {
       $('#name').addClass("invalid")

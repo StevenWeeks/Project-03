@@ -127,6 +127,7 @@ input.valid, textarea.valid {
 input.invalid, textarea.invalid {
   border: 2px solid red;
 }
+
 p.invalid {
   color: red;
   font-size: 8px;
