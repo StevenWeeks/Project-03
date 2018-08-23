@@ -6,7 +6,7 @@ $(document).ready(function () {
   $('#payment').val("credit card");
   $('fieldset div p').hide();
   $('#payment option[value="select_method"]').prop("disabled",true)
-  $('input[name="all"]').addClass('invalid')
+
   $('#colors-js-puns').hide()
   $('#mail').addClass('invalid')
   $('#cc-num').addClass('invalid')
@@ -294,6 +294,7 @@ function validate () {
     }if (($('input:checkbox:checked').length < 1)) {
       $("fieldset:eq(2) legend").append('<p class="invalid">Please pick an activity.</p>')
       e.preventDefault();
+      $("fieldset:eq(2) legend").animate({scrollTop: 0});
     }if (($('input:checkbox:checked').length >= 1)){
       $("fieldset:eq(2) legend p").hide()
     }if($('#name').val() === "") {
